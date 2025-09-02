@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: vidtube
+    env: node
+    plan: free
+    buildCommand: |
+      npm install
+      npm run build --prefix vidtube-frontend
+    startCommand: node index.js
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      # Add your secrets here OR in Render dashboard
+      # - key: MONGO_URI
+      #   sync: false

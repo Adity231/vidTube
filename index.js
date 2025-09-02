@@ -22,6 +22,18 @@ app.use('/auth', AuthRoutes);
 app.use('/api', VideoRoutes);
 app.use('/commentApi', CommentRoutes);
 
+const path = require("path");
+
+// Serve React frontend build
+app.use(express.static(path.join(__dirname, "vidtube-frontend", "build")));
+
+app.get("*", (req, res) => {
+  res.sendFile(
+    path.resolve(__dirname, "vidtube-frontend", "build", "index.html")
+  );
+});
+
+
 app.listen(port,()=>{
     console.log(`Server is running on port ${port}`)
 })
